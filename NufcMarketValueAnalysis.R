@@ -15,3 +15,8 @@ newcastle_players <- players[players$current_club_name == "Newcastle United", ]
 
 # creating a player evaluations subset of just newcastle players
 newcastle_player_valuations <- player_valuations[player_valuations$current_club_id == 762, ]
+
+##adding a column for time using a numerical value in nufc valuations
+newcastle_player_valuations$total <- as.numeric(substring(newcastle_player_valuations$date, 1,4))+
+  as.numeric(substring(newcastle_player_valuations$date,6,7))/12 +
+  as.numeric(substring(newcastle_player_valuations$date,9,10))/365
