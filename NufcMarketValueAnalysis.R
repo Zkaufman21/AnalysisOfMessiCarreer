@@ -21,6 +21,12 @@ newcastle_player_valuations$total_time <- as.numeric(substring(newcastle_player_
   as.numeric(substring(newcastle_player_valuations$date,6,7))/12 +
   as.numeric(substring(newcastle_player_valuations$date,9,10))/365
 
-ggplot(newcastle_player_valuations, aes(total_time, market_value_in_eur, color = factor(player_id)))+
+# add player names to player valuations using mutate()
+
+
+# plot newcastle players as time has gone on by their valuation 
+ggplot(newcastle_player_valuations[newcastle_player_valuations$total_time > 2015,], 
+       aes(total_time, market_value_in_eur/1000000, 
+           color = factor(newcastle_players$name[match(player_id, newcastle_players$player_id)])))+
   geom_point(alpha = .5)
 
