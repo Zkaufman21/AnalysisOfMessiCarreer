@@ -4,4 +4,14 @@
 ### player's market trends and specifically the effect the 
 ### new owners had on the market value.
 
-#I am using free data found from 
+# I am using free data found from https://data.world/dcereijo/player-scores
+
+# added ggplot2 library
+library(ggplot2)
+
+
+# making a newcastle subset of teams
+newcastle_players <- players[players$current_club_name == "Newcastle United", ]
+
+# creating a player evaluations subset of just newcastle players
+newcastle_player_valuations <- player_valuations[player_valuations$current_club_id == 762, ]
