@@ -17,6 +17,10 @@ newcastle_players <- players[players$current_club_name == "Newcastle United", ]
 newcastle_player_valuations <- player_valuations[player_valuations$current_club_id == 762, ]
 
 ##adding a column for time using a numerical value in nufc valuations
-newcastle_player_valuations$total <- as.numeric(substring(newcastle_player_valuations$date, 1,4))+
+newcastle_player_valuations$total_time <- as.numeric(substring(newcastle_player_valuations$date, 1,4))+
   as.numeric(substring(newcastle_player_valuations$date,6,7))/12 +
   as.numeric(substring(newcastle_player_valuations$date,9,10))/365
+
+ggplot(newcastle_player_valuations, aes(total_time, market_value_in_eur, color = factor(player_id)))+
+  geom_point(alpha = .5)
+
