@@ -27,24 +27,32 @@ relevant_newcastle_players <- newcastle_players[newcastle_players$last_season >2
 
 # plot newcastle players as time has gone on by their valuation 
 relevant_year_cutoff <- 2020
+
+#takeover date for easy use
+nufc_takeover_date <- 2021.852
+
 whole_nufc_team_scatterplot<- ggplot(player_valuations[player_valuations$total_time > relevant_year_cutoff,], 
        aes(total_time, market_value_in_eur/1000000, 
            color = factor(relevant_newcastle_players$name[match(player_id, 
                                                                 relevant_newcastle_players$player_id)])))+
-  geom_point(alpha = .5)+ # makes point semi see through
+ # geom_point(alpha = .5)+ # makes point semi see through
+  geom_line()+ # connects the data points
   scale_colour_discrete(na.translate = F)+  # removes na vals
   xlim(2020,2023)+ # sets x scale
   ylim(0,75)+ # sets y scale 
-  geom_vline(xintercept =  2021.852, # adding line for takeover date 
+  geom_vline(xintercept =  nufc_takeover_date, # adding line for takeover date 
              color = "#cc0000",
              lwd = 1,
-             linetype = "dashed")
+             linetype = "dashed")+
+  annotate("text",
+           x = nufc_takeover_date + .05,
+           y = 68,
+           label = "Takeover Date",
+           size = 3.5,
+           angle = 90)
 
 whole_nufc_team_scatterplot + labs(title = "Relevant Newcastle Players Market Value Growth",
                                      color = "Players",
                                      x = "Date (Takeover Occured Oct 7, 2021)",
                                      y = "Market Value (Millions of Euros")
-
-
-#Now I want to calculate the value of a
 
